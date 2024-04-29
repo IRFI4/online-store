@@ -1,83 +1,104 @@
-import React from 'react'
-import Icon from '../sprite/Icon';
-import product1 from '../images/product1.png'
+import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import CartItem from '../components/CartItem'
+import axios from 'axios'
+import Icon from '../sprite/Icon'
 
 const Cart = () => {
+  const [items, setItems] = useState([])
+  const [totalSum, setTotalSum] = useState(0)
+
+  // Fetching data from cart
+  useEffect(() => {
+    axios.get('https://6609ac0e0f324a9a28839d4e.mockapi.io/product-list/shoes/cart')
+      .then(res => {
+        setItems(res.data)
+        calculateTotalSum(res.data)
+      })
+      .catch(error => console.error('Error fetching data:', error))
+  }, [])
+
+  // Calculating total sum
+  const calculateTotalSum = (items) => {
+    if (items.length) {
+      const sum = items.reduce((acc, curr) => acc + curr.price, 0)
+      setTotalSum(sum)
+    } else {
+      setTotalSum(0)
+    }
+  }
+
+  const updateTotalSum = (itemId, itemPrice, itemCount) => {
+    const updatedItems = items.map((item) => {
+      if (item.id === itemId) {
+        return { ...item, count: itemCount }
+      }
+      return item
+    })
+
+    const sum = updatedItems.reduce((acc, item) => acc + item.price * (item.count || 1), 0)
+    setTotalSum(sum)
+    setItems(updatedItems)
+  }
+
+  // Deleting data from cart
+  const removeItem = (itemId) => {
+    const updatedItems = items.filter((item) => item.id !== itemId)
+    setItems(updatedItems)
+    axios.delete(`https://6609ac0e0f324a9a28839d4e.mockapi.io/product-list/shoes/cart/${itemId}`)
+      .then(() => {
+        const removedItem = items.find((item) => item.id === itemId)
+        const sum = totalSum - removedItem.price * removedItem.count
+        setTotalSum(sum)
+
+        // const updatedItems = items.filter(item => item.id !== itemId)
+        // setItems(updatedItems)
+        // calculateTotalSum(updatedItems)
+      })
+  }
+
+  // Returns user to the previous page
+  const navigate = useNavigate()
+  const goBack = () => {
+    navigate(-1)
+  }
+
   return (
-    <div className='cart-wrapper'>
+    <>
+      <div className='cart-return-block'>
+        <div onClick={goBack} className='arrow-block'><Icon id='bold-arrow' className='cart-arrow' /><p>Return to shopping</p></div>
+        <div onClick={goBack} className='cross-block'><Icon id='cross' className='cart-close' /></div>
+      </div>
+      <div className='cart-wrapper'>
         <div className='cart'>
           <h3>Cart</h3>
           <div className='cart-content'>
             <div className='cart-list'>
 
-              <div className='cart-item'>
-                <div className='item-img'>
-                  <img src={product1} alt='#'/>
-                </div>
-                <div className='item-description'>
-                  <div className='item-title'>
-                    <p>Skechers women's casual sneakers</p>
-                  </div>
-                  <div className='item-params'>
-                    <span>Size: 40.5</span>
-                    <span>Color: Black</span>
-                  </div>
-                </div>
-                <div className='item-counter'>
-                  <button>-</button>
-                  <input type='number'/>
-                  <button>+</button>
-                </div>
-                <div className='item-trash'>
-                  <div className='item-price'>
-                    <b>$96</b>
-                  </div>
-                  <div className='item-remove'>
-                    <Icon id='remove' className='remove-icon' />
-                    <span>Remove</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className='cart-item'>
-                <div className='item-img'>
-                  <img src={product1} alt='#'/>
-                </div>
-                <div className='item-description'>
-                  <div className='item-title'>
-                    <p>Skechers women's casual sneakers</p>
-                  </div>
-                  <div className='item-params'>
-                    <span>Size: 40.5</span>
-                    <span>Color: Black</span>
-                  </div>
-                </div>
-                <div className='item-counter'>
-                  <button>-</button>
-                  <input type='number'/>
-                  <button>+</button>
-                </div>
-                <div className='item-trash'>
-                  <div className='item-price'>
-                    <b>$96</b>
-                  </div>
-                  <div className='item-remove'>
-                    <Icon id='remove' className='remove-icon' />
-                    <span>Remove</span>
-                  </div>
-                </div>
-              </div>
+              {items.map((obj) => <CartItem
+                key={obj.id}
+                id={obj.id}
+                image={obj.imageUrl}
+                description={obj.description}
+                price={obj.price}
+                obj={obj}
+                removeItem={removeItem}
+                size={obj.size}
+                color={obj.color}
+                updateTotalSum={updateTotalSum}
+              />)}
 
             </div>
             <div className='cart-total'>
               <div className='total-price'>
-                <span>Total:</span><b>$192</b>
+                <span>Total:</span><b>${totalSum}</b>
               </div>
-              <button>Buy</button>
+              <button onClick={() => navigate('/checkout', { state: { items } })}>Buy</button>
             </div>
           </div>
-        </div> 
+        </div>
       </div>
+    </>
   )
 }
 

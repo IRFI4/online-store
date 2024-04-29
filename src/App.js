@@ -1,31 +1,43 @@
 import './App.css'
+import React, { useState, useEffect } from 'react'
+import { Routes, Route, useLocation } from "react-router-dom"
 import Header from './components/Header'
-import Hero from './components/Hero'
-import Categories from './components/Categories'
-import TopSellers from './components/TopSellers'
-import Slider from './components/Slider'
-import Brands from './components/Brands'
-import Explore from './components/Explore'
+import Home from './routes/Home'
 import Footer from './components/Footer'
-// import Cart from './components/Cart'
-// import Checkout from './components/Checkout'
-// import Product from './components/Product'
-// import Main from './components/Main'
+import Main from './components/Main'
+import ProductReview from './routes/ProductReview'
+import Cart from './components/Cart'
+import Checkout from './components/Checkout'
 
-function App() {
+// Scrolling to top every time path changing 
+const ScrollToTop = () => {
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+
+  return null
+}
+
+const App = () => {
+  const [searchQuery, setSearchQuery] = useState('')
+
+  const handleSearch = (query) => {
+    setSearchQuery(query)
+  }
+
   return (
     <div className='app'>
-      <Header />
-      <Hero />
-      <Categories />
-      <TopSellers />
-      <Slider />
-      <Brands />
-      <Explore />
-      {/* <Cart /> */}
-      {/* <Checkout /> */}
-      {/* <Product /> */}
-      {/* <Main /> */}
+      <Header onSearch={handleSearch} />
+      <ScrollToTop />
+      <Routes>
+        <Route path='/' exact element={<Home />} />
+        <Route path='/list' element={<Main searchQuery={searchQuery} />} />
+        <Route path='/product-review/:id' element={<ProductReview />} />
+        <Route path='/cart' element={<Cart />} />
+        <Route path='/checkout' element={<Checkout />} />
+      </Routes>
       <Footer />
     </div>
   );

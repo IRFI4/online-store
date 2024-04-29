@@ -1,83 +1,61 @@
-import React from 'react'
-import sneakers1 from '../images/product-sneakers1.png'
-import sneakers2 from '../images/product-sneakers2.png'
-import sneakers3 from '../images/product-sneakers3.png'
-import sneakers4 from '../images/product-sneakers4.png'
-import Icon from "../sprite/Icon"
+import React, { useState, useEffect } from 'react'
+import Card from "../components/Card"
+import Slider from "react-slick"
+import Heading from "../components/Heading"
+import axios from 'axios'
 
 
-const TopSellers = () => {
+const TopSellers = (props) => {
+  const [sliderItems, setSliderItems] = useState([])
+
+  useEffect(() => {
+    axios.get('https://6609ac0e0f324a9a28839d4e.mockapi.io/product-list/shoes/products').then(res => {
+      res.data.length = 8
+      setSliderItems(res.data)
+    })
+  }, [])
+
+  var settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+  };
+
+  const [category, setCategory] = useState('boots')
+
   return (
+
     <section className='top-sellers-section'>
       <div className='top-sellers-wrapper'>
-        <h2>Top sellers</h2>
+
+        <Heading title={props.title} />
+
         <div className='top-sellers-switcher'>
-          <input type='radio' name='switcher' id='boots' value='boots'/><label for='boots'>boots</label>
-          <input type='radio' name='switcher' id='jakets' value='jakets'/><label for='jakets'>jakets</label>
-          <input type='radio' name='switcher' id='leggings' value='leggings'/><label for='leggings'>leggings</label>
-          <input type='radio' name='switcher' id='windbreakers' value='windbreakers'/><label for='windbreakers'>windbreakers</label>
+          <input onChange={() => setCategory('boots')} checked={category === 'boots'} type='radio' name='category' id='boots' value='boots' /><label htmlFor='boots'>boots</label>
+          <input onChange={() => setCategory('jakets')} checked={category === 'jakets'} type='radio' name='category' id='jakets' value='jakets' /><label htmlFor='jakets'>jakets</label>
+          <input onChange={() => setCategory('leggings')} checked={category === 'leggings'} type='radio' name='category' id='leggings' value='leggings' /><label htmlFor='leggings'>leggings</label>
+          <input onChange={() => setCategory('windbreakers')} checked={category === 'windbreakers'} type='radio' name='category' id='windbreakers' value='windbreakers' /><label htmlFor='windbreakers'>windbreakers</label>
         </div>
 
-        <div className='card-wrapper'>
-          {/* <Icon id='arrow' className='card-slider'/> */}
-          
-          <div className='card'>
-            <img  className='card-image' src={sneakers1} alt='sneakers' />
-            <div className='card-description'>
-              <div className='lables'>
-                <span className='new-arrival-label'>New arrival</span>
-                <span className='sale-label'>-20%</span>
-              </div>
-              <p>Women's running shoes Nike QUEST</p>
-              <span className='card-price'>$150</span>
-            </div>
-          </div>
-
-          <div className='card'>
-            <img src={sneakers2} alt='sneakers' />
-            <div className='card-description'>
-              <div className='lables'>
-                <span className='new-arrival-label'>New arrival</span>
-              </div>
-              <p>Women’s running shoes Asics gel-trabuco 11 GTX</p>
-              <span className='card-price'>$188</span>
-            </div>
-          </div>
-
-          <div className='card'>
-            <img src={sneakers3} alt='sneakers' />
-            <div className='card-description'>
-              <div className='lables'>
-                <span className='new-arrival-label'>New arrival</span>
-                <span className='sale-label'>-20%</span>
-              </div>
-              <p>Women's running shoes Asics DYNABLAST</p>
-              <span className='card-price'>$124</span>
-            </div>
-          </div>
-
-          <div className='card'>
-            <img src={sneakers4} alt='sneakers' />
-            <div className='card-description'>
-              <div className='lables'>
-                <span className='new-arrival-label'>New arrival</span>
-              </div>
-              <p>New Balance 411 V3 W411CK3 Women's Running Shoes</p>
-              <span className='card-price'>$96</span>
-            </div>
-          </div>
-
-          <div className='arrows'>
-            <Icon id='arrow' className='card-slider'/>
-            <Icon id='arrow' className='card-slider'/>
-          </div>
-          
+        <div>
+          <Slider {...settings}>
+            {sliderItems.map(obj => <Card
+              key={obj.id}
+              id={obj.id}
+              object={obj}
+              image={obj.imageUrl}
+              brand={obj.brand}
+              label={obj.label}
+              discount={obj.discount}
+              description={obj.description}
+              price={obj.price}
+              sizes={obj.sizes}
+            />)}
+          </Slider>
         </div>
-        
-        <div className='slider-buttons'>
-          <div className='slider-dot active'></div>
-          <div className='slider-dot'></div>
-        </div>
+
       </div>
     </section>
   )
