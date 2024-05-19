@@ -2,12 +2,16 @@ import React from 'react'
 import Slider from 'react-slider'
 import { useState } from 'react'
 
-const DoubleRange = () => {
+const DoubleRange = ({ onRangeClick }) => {
     // Current MIN, MAX 
     const [values, setValues] = useState([20, 130])
 
     const MIN = 5
     const MAX = 150
+
+    const handleButtonClick = () => {
+        onRangeClick(values[0], values[1])
+    }
 
     return (
         <div className='range-wrapper'>
@@ -16,7 +20,7 @@ const DoubleRange = () => {
                 <div className='price-range'>
                     <div className='value'>${values[0]}</div>
                     <div className='value'>${values[1]}</div>
-                    <button className='confirm'>ok</button>
+                    <button onClick={handleButtonClick} className='confirm'>ok</button>
                 </div>
                 <Slider
                     className={"range-slider"}

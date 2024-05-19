@@ -6,13 +6,15 @@ import Icon from '../sprite/Icon'
 
 const Main = ({ searchQuery }) => {
   const [items, setItems] = useState([])
-  // const [filters, setFilters] = useState({
-  //   sizes: [],
-  //   colors: [],
-  //   brands: [],
-  //   minPrice: 0,
-  //   maxPrice: 1000,
-  // })
+  const [filters, setFilters] = useState({
+    category: [],
+    department: [],
+    sizes: [],
+    colors: [],
+    brands: [],
+    minPrice: 5,
+    maxPrice: 150,
+  })
 
   // Fetching data from products
   useEffect(() => {
@@ -21,32 +23,37 @@ const Main = ({ searchQuery }) => {
     })
   }, [])
 
-  // const filteredProducts = items.filter(product => {
-  //   const sizeMatch = (filters.sizes && filters.sizes.length === 0) || filters.sizes.includes(product.size)
-  //   const colorMatch = (filters.colors && filters.colors.length === 0) || filters.colors.includes(product.color)
-  //   const brandMatch = (filters.brands && filters.brands.length === 0) || filters.brands.includes(product.brand)
-  //   const priceMatch = product.price >= filters.minPrice && product.price <= filters.maxPrice
+  //Filtering products by parameters 
+  const filteredProducts = items.filter(product => {
+    const categoryMatch = (filters.category && filters.category.length === 0) || filters.category.includes(product.category)
+    const departmentMatch = (filters.department && filters.department.length === 0) || filters.department.includes(product.department)
+    const sizeMatch = (filters.sizes && filters.sizes.length === 0) || filters.sizes.some(size => product.sizes.includes(Number(size)))
+    const colorMatch = (filters.colors && filters.colors.length === 0) || filters.colors.includes(product.color.toLowerCase())
+    const brandMatch = (filters.brands && filters.brands.length === 0) || filters.brands.includes(product.brand)
+    const priceMatch = product.price >= filters.minPrice && product.price <= filters.maxPrice
+    return categoryMatch && departmentMatch && sizeMatch && colorMatch && brandMatch && priceMatch
+  })
 
-  //   return sizeMatch && colorMatch && brandMatch && priceMatch
-  // })
-
-  // const handleFilterChange = (filterType, value, boolean) => {
-  //   console.log({ [filterType]: value })
-  //   setFilters(prevFilters => ({
-
-  //     ...prevFilters,
-  //     [filterType]: value
-  //   }))
-  //   console.log(filters)
-  // }
+  // Setting parametrs for filter 
+  const handleFilterChange = (filterType, value, checked) => {
+    if (checked) {
+      setFilters(prevFilters => ({
+        ...prevFilters,
+        [filterType]: [value]
+      }))
+    } else {
+      setFilters(prevFilters => ({
+        ...prevFilters,
+        [filterType]: value
+      }))
+    }
+  }
 
   return (
     <div className='main-content'>
-      {/* <Filter onFilterChange={handleFilterChange} /> */}
-      <Filter />
+      <Filter onFilterChange={handleFilterChange} />
       <main>
-        {/* {filteredProducts.map(obj => <Card */}
-        {items.filter((item) => item.description.toLowerCase().includes(searchQuery.toLowerCase())).map(obj => <Card
+        {filteredProducts.filter(item => item.description.toLowerCase().includes(searchQuery.toLowerCase())).map(obj => <Card
           key={obj.id}
           id={obj.id}
           object={obj}
