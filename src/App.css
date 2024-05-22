@@ -1530,6 +1530,7 @@ main {
   flex-direction: row;
   gap: 12px;
   width: 99%;
+  height: 28px;
   margin-top: 10px;
 }
 

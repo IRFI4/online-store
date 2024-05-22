@@ -15,6 +15,8 @@ const Main = ({ searchQuery }) => {
     minPrice: 5,
     maxPrice: 150,
   })
+  const [currentPage, setCurrentPage] = useState(1)
+  const itemsPerPage = 15
 
   // Fetching data from products
   useEffect(() => {
@@ -34,6 +36,25 @@ const Main = ({ searchQuery }) => {
     return categoryMatch && departmentMatch && sizeMatch && colorMatch && brandMatch && priceMatch
   })
 
+  //Get current items
+  const indexOfLastItem = currentPage * itemsPerPage
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage
+  const currentItems = filteredProducts.slice(indexOfFirstItem, indexOfLastItem)
+
+  //Change page
+  const paginate = (numberOfPage) => {
+    setCurrentPage(numberOfPage)
+    // window.scrollTo(0, 0)
+  }
+
+  const nextPage = () => {
+    setCurrentPage(prevPage => Math.min(prevPage + 1, pageNumbers.length))
+  }
+
+  const prevPage = () => {
+    setCurrentPage(prevPage => Math.max(prevPage - 1, 1))
+  }
+
   // Setting parametrs for filter 
   const handleFilterChange = (filterType, value, checked) => {
     if (checked) {
@@ -47,13 +68,19 @@ const Main = ({ searchQuery }) => {
         [filterType]: value
       }))
     }
+    setCurrentPage(1)
+  }
+
+  const pageNumbers = []
+  for (let i = 1; i <= Math.ceil(filteredProducts.length / itemsPerPage); i++) {
+    pageNumbers.push(i)
   }
 
   return (
     <div className='main-content'>
       <Filter onFilterChange={handleFilterChange} />
       <main>
-        {filteredProducts.filter(item => item.description.toLowerCase().includes(searchQuery.toLowerCase())).map(obj => <Card
+        {currentItems.filter(item => item.description.toLowerCase().includes(searchQuery.toLowerCase())).map(obj => <Card
           key={obj.id}
           id={obj.id}
           object={obj}
@@ -67,16 +94,16 @@ const Main = ({ searchQuery }) => {
         />)}
 
         <div className='pagination'>
-          <div className='page'>
+          <div onClick={prevPage} className='page'>
             <Icon id='paginate-arrow' className='paginate-arrow prev' />
           </div>
-          <div className='page active'>1</div>
-          <div className='page'>2</div>
-          <div className='page'>3</div>
-          <div className='page'>4</div>
-          <div className='page'>5</div>
-          <div className='page'>6</div>
-          <div className='page'>
+
+          {pageNumbers.map(number =>
+            <div key={number} onClick={() =>
+              paginate(number)} className={number !== currentPage ? 'page' : 'page active'} >{number}</div>
+          )}
+
+          <div onClick={nextPage} className='page'>
             <Icon id='paginate-arrow' className='paginate-arrow next' />
           </div>
         </div>
