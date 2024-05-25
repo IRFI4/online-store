@@ -44,15 +44,17 @@ const Main = ({ searchQuery }) => {
   //Change page
   const paginate = (numberOfPage) => {
     setCurrentPage(numberOfPage)
-    // window.scrollTo(0, 0)
+    window.scrollTo(0, 0)
   }
 
   const nextPage = () => {
     setCurrentPage(prevPage => Math.min(prevPage + 1, pageNumbers.length))
+    window.scrollTo(0, 0)
   }
 
   const prevPage = () => {
     setCurrentPage(prevPage => Math.max(prevPage - 1, 1))
+    window.scrollTo(0, 0)
   }
 
   // Setting parametrs for filter 
