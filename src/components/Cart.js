@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import CartItem from '../components/CartItem'
 import axios from 'axios'
-import Icon from '../sprite/Icon'
+import Icon from './Icon'
 
 const Cart = () => {
   const [items, setItems] = useState([])
@@ -50,10 +50,6 @@ const Cart = () => {
         const removedItem = items.find((item) => item.id === itemId)
         const sum = totalSum - removedItem.price * removedItem.count
         setTotalSum(sum)
-
-        // const updatedItems = items.filter(item => item.id !== itemId)
-        // setItems(updatedItems)
-        // calculateTotalSum(updatedItems)
       })
   }
 

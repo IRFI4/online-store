@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import Icon from '../sprite/Icon';
+import Icon from './Icon';
 import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import TopSellers from './TopSellers';
+import Image from './Image';
 
 const Product = () => {
   const [choosedSize, setChoosedSize] = useState(8)
@@ -29,13 +30,21 @@ const Product = () => {
       <div className='product'>
         <div className='product-images'>
           <div className='secondary-images'>
-            <img src={require(`../images/${product.imageUrl[1]}.png`)} alt='sneakers' />
-            <img src={require(`../images/${product.imageUrl[2]}.png`)} alt='sneakers' />
-            <img src={require(`../images/${product.imageUrl[3]}.png`)} alt='sneakers' />
+            {/* <img src={require(`../images/${product.imageUrl[1]}.png`)} alt='sneakers' /> */}
+            {/* <img src={require(`../images/${product.imageUrl[2]}.png`)} alt='sneakers' /> */}
+            {/* <img src={require(`../images/${product.imageUrl[3]}.png`)} alt='sneakers' /> */}
+            <Image url={`/products/${product.imageUrl[1]}.png`} alt={'sneakers'} />
+            <Image url={`/products/${product.imageUrl[2]}.png`} alt={'sneakers'} />
+            <Image url={`/products/${product.imageUrl[3]}.png`} alt={'sneakers'} />
           </div>
           <div className='primary-image'>
-            {product.brand && <div className='product-brand'><img src={require(`../images/${product.brand}.png`)} alt={product.brand} /></div>}
-            <img src={require(`../images/${product.imageUrl[0]}.png`)} alt='sneakers' />
+            {/* {product.brand && <div className='product-brand'><img src={require(`../images/${product.brand}.png`)} alt={product.brand} /></div>} */}
+            {product.brand && <div className='product-brand'>
+              <Image url={`/brands/${product.brand}.png`} alt={'sneakers'} />
+            </div>}
+            {/* <img src={require(`../images/${product.imageUrl[0]}.png`)} alt='sneakers' /> */}
+
+            <Image url={`/products/${product.imageUrl[0]}.png`} alt={'sneakers'} />
           </div>
         </div>
 

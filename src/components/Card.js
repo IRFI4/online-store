@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-
+import Image from './Image'
 
 const Card = (props) => {
     const product = props.object
@@ -8,11 +8,14 @@ const Card = (props) => {
 
     return (
         <div className='card' key={props.id}>
-            {props.brand && <div className='card-brand'><img src={require(`../images/${props.brand}.png`)} alt={props.brand} /></div>}
+            {props.brand &&
+                <div className='card-brand'>
+                    <Image url={`/brands/${props.brand}.png`} alt={'test'} />
+                </div>}
             <img
                 className='card-image'
                 onClick={() => navigate(`/product-review/${props.id}`, { state: { product } })}
-                src={require(`../images/${props.image[0]}.png`)}
+                src={require(`../images/products/${props.image[0]}.png`)}
                 alt='sneakers'
             />
             <div className='card-description'>

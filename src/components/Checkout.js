@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import ApplePay from '../images/apple-pay.png'
-import GooglePay from '../images/google-pay.png'
-import LiqPay from '../images/liq-pay.png'
 import CheckoutItem from '../components/CheckoutItem'
+import Image from './Image'
 
 const Checkout = () => {
   const [checkoutSum, setCheckoutSum] = useState(0)
@@ -23,9 +21,17 @@ const Checkout = () => {
         <div className='express-checkout'>
           <h3>Express Checkout</h3>
           <div className='pay-button-wrapper'>
-            <div className='pay-button'> <img src={LiqPay} alt='pay' /> </div>
-            <div className='pay-button'> <img src={GooglePay} alt='pay' /> <span className='google-pay'>Pay</span></div>
-            <div className='pay-button'> <img src={ApplePay} alt='pay' /> <span className='apple-pay'>Pay</span></div>
+            <div className='pay-button'>
+              <Image url={'/assets/liq-pay.png'} alt={'liq-pay'} />
+            </div>
+            <div className='pay-button'>
+              <Image url={'/assets/google-pay.png'} alt={'liq-pay'} />
+              <span className='google-pay'>Pay</span>
+            </div>
+            <div className='pay-button'>
+              <Image url={'/assets/apple-pay.png'} alt={'liq-pay'} />
+              <span className='apple-pay'>Pay</span>
+            </div>
           </div>
           <h3>Or</h3>
         </div>
@@ -69,12 +75,12 @@ const Checkout = () => {
             </div>
           </div>
 
-          <button className='pay-now'>Pay now</button>
+          <button type='button' className='pay-now'>Pay now</button>
 
           <div className='links'>
-            <a href='google.com'>Refund policy </a>
-            <a href='google.com'>Privacy policy</a>
-            <a href='google.com'>Terms of service</a>
+            <a href=''>Refund policy</a>
+            <a href=''>Privacy policy</a>
+            <a href=''>Terms of service</a>
           </div>
         </form>
       </div>
@@ -95,7 +101,7 @@ const Checkout = () => {
 
         </div>
         <div className='total-discount'>
-          <input type='password' placeholder='Discount code or gift card' />
+          <input type='text' placeholder='Discount code or gift card' />
           <button className='apply'>Apply</button>
         </div>
 

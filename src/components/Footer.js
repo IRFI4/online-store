@@ -1,4 +1,4 @@
-import Icon from '../sprite/Icon'
+import Icon from './Icon'
 
 const Footer = () => {
   return (

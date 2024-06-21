@@ -1,23 +1,18 @@
 import React from 'react'
-import nike from '../images/brand-nike.png'
-import theNorthFace from '../images/brand-the-north-face.png'
-import skechers from '../images/brand-skechers.png'
-import adidas from '../images/brand-adidas.png'
-import timberland from '../images/brand-timberland.png'
-import asics from '../images/brand-asics.png'
-import Heading from "../components/Heading"
+import Heading from "./Heading"
+import Image from './Image'
 
 const Brands = () => {
   return (
     <section className='brands-section'>
       <Heading title={'Brand you love'} />
       <div className='brands-wrapper'>
-        <img src={nike} alt='nike-brand' />
-        <img src={theNorthFace} alt='the-north-face-brand' />
-        <img src={skechers} alt='skechers-brand' />
-        <img src={adidas} alt='adidas-brand' />
-        <img src={timberland} alt='timberland-brand' />
-        <img src={asics} alt='asics-brand' />
+        <Image url={'/brands/brand-nike.png'} alt={'nike-brand'} />
+        <Image url={'/brands/brand-the-north-face.png'} alt={'the-north-face-brand'} />
+        <Image url={'/brands/brand-skechers.png'} alt={'skechers-brand'} />
+        <Image url={'/brands/brand-adidas.png'} alt={'adidas-brand'} />
+        <Image url={'/brands/brand-timberland.png'} alt={'timberland-brand'} />
+        <Image url={'/brands/brand-asics.png'} alt={'asics-brand'} />
       </div>
     </section>
   )

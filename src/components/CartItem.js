@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import Icon from '../sprite/Icon';
+import Icon from './Icon';
+import Image from './Image';
 
 const CartItem = (props) => {
 
@@ -25,7 +26,7 @@ const CartItem = (props) => {
     return (
         <div className='cart-item'>
             <div className='item-img'>
-                <img src={require(`../images/${props.image[0]}.png`)} alt='#' />
+                <Image url={`/products/${props.image[0]}.png`} alt={'sneakers'} />
             </div>
             <div className='item-description'>
                 <div className='item-title'>

@@ -1,8 +1,7 @@
 import React from 'react'
-import exploreNike from '../images/explore-nike.jpg'
-import exploreHoodrich from '../images/explore-hoodrich.jpg'
-import Icon from '../sprite/Icon'
+import Icon from './Icon'
 import Heading from "../components/Heading"
+import Image from './Image'
 
 const Explore = () => {
   return (
@@ -10,14 +9,14 @@ const Explore = () => {
       <Heading title={'Explore more'} />
       <div className='explore-wrapper'>
         <div className='image-wrapper'>
-          <img src={exploreNike} alt='man-wearing-nike-sportswear' />
+          <Image url={'/assets/explore-nike.jpg'} alt={'test'} />
           <div className='text-wrapper'>
             <span>Nike</span>
             <Icon id='black-line' className='line' />
           </div>
         </div>
         <div className='image-wrapper'>
-          <img src={exploreHoodrich} alt='man-wearing-hoodrich-sportswear' />
+          <Image url={'/assets/explore-hoodrich.jpg'} alt={'test'} />
           <div className='text-wrapper'>
             <span>Hoodrich</span>
             <Icon id='black-line' className='line' />

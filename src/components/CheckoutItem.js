@@ -1,11 +1,12 @@
 import React from 'react'
+import Image from './Image'
 
 const CheckoutItem = (props) => {
     return (
         <div className='total-cart-item'>
             <div className='total-cart-img'>
                 <div className='total-cart-count'>{props.count}</div>
-                <img src={require(`../images/${props.image[0]}.png`)} alt='#' />
+                <Image url={`/products/${props.image[0]}.png`} alt={'text'} />
             </div>
             <div className='total-cart-description'>
                 <div className='total-cart-title'>
