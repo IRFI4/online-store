@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/team-challenge/static/css/main.968b855e.css",
-    "main.js": "/team-challenge/static/js/main.52e49e59.js",
+    "main.js": "/team-challenge/static/js/main.a0a3a329.js",
     "static/media/gym-background.jpg": "/team-challenge/static/media/gym-background.3636e32e0f3decc05a0d.jpg",
     "static/media/slider-background.png": "/team-challenge/static/media/slider-background.f2940a6000c94352c453.png",
     "static/media/explore-hoodrich.jpg": "/team-challenge/static/media/explore-hoodrich.712f59287711a5696c94.jpg",
@@ -68,10 +68,10 @@
     "static/media/orbitron-v31-latin-regular.woff2": "/team-challenge/static/media/orbitron-v31-latin-regular.1b2c34c3c996f3af4736.woff2",
     "index.html": "/team-challenge/index.html",
     "main.968b855e.css.map": "/team-challenge/static/css/main.968b855e.css.map",
-    "main.52e49e59.js.map": "/team-challenge/static/js/main.52e49e59.js.map"
+    "main.a0a3a329.js.map": "/team-challenge/static/js/main.a0a3a329.js.map"
   },
   "entrypoints": [
     "static/css/main.968b855e.css",
-    "static/js/main.52e49e59.js"
+    "static/js/main.a0a3a329.js"
   ]
 }
