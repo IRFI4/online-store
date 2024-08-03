@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
-import Hero from '../components/Hero'
-import Categories from '../components/Categories'
+import Hero from '../components/home/Hero'
+import Categories from '../components/home/Categories'
 import TopSellers from '../components/TopSellers'
-import Slider from '../components/Slider'
-import Brands from '../components/Brands'
-import Explore from '../components/Explore'
+import Slider from '../components/home/Slider'
+import Brands from '../components/home/Brands'
+import Explore from '../components/home/Explore'
 
 function Home() {
     const [loaded, setLoaded] = useState(false)

@@ -15,8 +15,10 @@ const Card = (props) => {
             <img
                 className='card-image'
                 onClick={() => navigate(`/product-review/${props.id}`, { state: { product } })}
-                src={require(`../images/products/${props.image[0]}.png`)}
+                src={require(`../images/products/${props.image[0]}.jpg`)}
                 alt='sneakers'
+                width={250}
+                heigth={250}
             />
             <div className='card-description'>
                 <div className='lables'>

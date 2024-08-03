@@ -306,9 +306,13 @@ ul>li {
   align-items: center;
 }
 
+.card-image {
+  transition: transform 0.3s ease-in;
+  cursor: pointer;
+}
+
 .card-image:hover {
-  transform: scale(115%);
-  transition: all 0.3s ease-in;
+  transform: scale(1.1);
 }
 
 .arrows {
@@ -781,6 +785,7 @@ main {
   display: flex;
   justify-content: space-around;
   gap: 30px;
+  margin-bottom: 75px;
 }
 
 .product-images {
@@ -796,13 +801,17 @@ main {
 .product-brand img {
   position: absolute;
   max-width: 180px;
-  top: 40px;
+  top: 10px;
   right: 45px;
 }
 
 .primary-image {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   min-width: 630px;
   min-height: 630px;
+  background: #fff;
 }
 
 .primary-image img {
@@ -810,11 +819,15 @@ main {
 }
 
 .secondary-images {
-  width: 150px;
-  height: 150px;
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+.secondary-images img {
+  width: 150px;
+  height: 150px;
+  background: #fff;
 }
 
 .product-description {

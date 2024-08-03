@@ -30,21 +30,17 @@ const Product = () => {
       <div className='product'>
         <div className='product-images'>
           <div className='secondary-images'>
-            {/* <img src={require(`../images/${product.imageUrl[1]}.png`)} alt='sneakers' /> */}
-            {/* <img src={require(`../images/${product.imageUrl[2]}.png`)} alt='sneakers' /> */}
-            {/* <img src={require(`../images/${product.imageUrl[3]}.png`)} alt='sneakers' /> */}
-            <Image url={`/products/${product.imageUrl[1]}.png`} alt={'sneakers'} />
-            <Image url={`/products/${product.imageUrl[2]}.png`} alt={'sneakers'} />
-            <Image url={`/products/${product.imageUrl[3]}.png`} alt={'sneakers'} />
+            <Image url={`/products/${product.imageUrl[1]}.jpg`} alt={'sneakers'} width={150} height={150} />
+            <Image url={`/products/${product.imageUrl[2]}.jpg`} alt={'sneakers'} width={150} height={150} />
+            <Image url={`/products/${product.imageUrl[3]}.jpg`} alt={'sneakers'} width={150} height={150} />
+            <Image url={`/products/${product.imageUrl[4]}.jpg`} alt={'sneakers'} width={150} height={150} />
           </div>
           <div className='primary-image'>
-            {/* {product.brand && <div className='product-brand'><img src={require(`../images/${product.brand}.png`)} alt={product.brand} /></div>} */}
-            {product.brand && <div className='product-brand'>
-              <Image url={`/brands/${product.brand}.png`} alt={'sneakers'} />
-            </div>}
-            {/* <img src={require(`../images/${product.imageUrl[0]}.png`)} alt='sneakers' /> */}
-
-            <Image url={`/products/${product.imageUrl[0]}.png`} alt={'sneakers'} />
+            {product.brand &&
+              <div className='product-brand'>
+                <Image url={`/brands/${product.brand}.png`} alt={product.brand} />
+              </div>}
+            <Image url={`/products/${product.imageUrl[0]}.jpg`} alt={'sneakers'} />
           </div>
         </div>
 
