@@ -32,7 +32,7 @@ const App = () => {
       <Header onSearch={handleSearch} />
       <ScrollToTop />
       <Routes>
-        <Route path='/team-challenge/' exact element={<Home />} />
+        <Route path='/online-store/' exact element={<Home />} />
         <Route path='/list' element={<Main searchQuery={searchQuery} />} />
         <Route path='/product-review/:id' element={<ProductReview />} />
         <Route path='/cart' element={<Cart />} />

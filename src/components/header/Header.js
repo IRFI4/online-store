@@ -23,7 +23,7 @@ const Header = (props) => {
   return (
     <header className='header'>
       <div className='header-logo'>
-        <Link to='/team-challenge/'><Icon id='logo' /></Link>
+        <Link to='/online-store/'><Icon id='logo' /></Link>
       </div>
 
 
